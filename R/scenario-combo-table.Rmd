@@ -1,0 +1,104 @@
+<!-- ## draft table for scenarios -->
+
+```{r}
+#suppressPackageStartupMessages(library(tidyverse))
+library(dplyr)
+library(tidyr)
+library(magrittr)
+```
+
+
+```{r}
+#Permitting
+permits <- c("no change", "species substitution")
+
+#Including unmanaged stocks in simulation models
+unmanaged <- c("yes", "no")
+
+#Demonstration of how biological outcomes from the alternatives tested are consistent with Magnuson Stevens Act National Standard 1.
+
+#How mixed species catches within fleets and stock complexes constrain the ability of management alternatives to meet management objectives
+
+#Changes in fishing fleet behavior in response to changes in the availability of the various species
+#Changes in fishing fleet behavior in response to changes in the biomass status of particular stocks (e.g. flexibility for avoidance of depleted stocks)
+#Changes in fishing fleet behavior as a result of changes in economic value of different species
+fleet_dynamics <- c("current", "abundance", "value", "avoidance")
+
+#Models of fish population dynamics that include effects of predator-prey relationships among the modeled species
+
+#Evaluation of the performance of management alternatives given the current status of the fishery (e.g. our initial conditions represent current biomass levels)
+init_bio <- c("current", "higher")
+
+#Evaluation of the performance of management alternatives under different expectations for future stock productivity (which could include alternative initial stock status based on historical stock sizes)
+future_productivity <- c("current", "historical", "projected")
+
+#Expected effects of climate change on productivity (recruitment, growth, mortality) of modeled stocks
+climate_effects <- c("worst case","no change")
+
+#Graphics and visual aids for communicating model/process components
+#Graphics and visual aids for communicating modeling scenario results
+#Identification of where data availability limits analyses
+
+#10-species food web used in the Hydra model and worked example
+#Additional / Fewer species
+nGB_species <- c("Hydra-10", "more", "fewer")
+
+#Dynamics of modeled stocks that occur outside of Georges Bank
+outside_dynamics <- c("closed", "migration")
+
+#Fishing mortality of modeled stocks that occur outside of Georges Bank
+outside_fishing <- c("closed", "outsideF")
+
+#Fishing fleet dynamics for stocks not in the model (e.g. scallop fishery)
+bycatch_fleets <- c("none", "scallops")
+
+#Changes to modeled fish populations driven by ecosystem changes (e.g. shifts in primary productivity, etc.)
+ecosystem_drivers <- c("none", "primary_production")
+
+#Changes in expected mortality as a result of changes in top predator population size
+#Foodweb effects of fish predator populations that may increase their presence on Georges Bank with ocean warming
+predator_pressure <- c("none", "top predators", "fish predators moving in")
+
+#Including changes in unmodeled fish populations that are main sources of prey for modeled fish predators
+prey_change <- c("none", "increase", "decrease")
+
+#Effects of shifts in spatial distribution of stocks due to climate change
+stock_availability <- c("same", "climate shifts")
+
+#Number of fleets, add Recreational fishing
+recreational_fleet <- c("yes", "no")
+
+#Explicit consideration of discards and landed fish in the model
+model_discards <- c("yes", "no")
+
+# Management alternatives that aggregate stocks into stock complexes
+# Management alternatives that place limits on total catch from the modeled system
+# Management alternatives that place limits on total catch from each stock complex
+# Management alternatives that consider business as usual (single-species management)
+# Management alternatives that reduce catch advice when stock complexes become depleted
+# Management alternatives that reduce stock complex catch advice when individual stocks within complexes become depleted
+# Management alternatives that include specific rules for rebuilding when modeled stocks become depleted.
+# Management alternatives that consider different ways to aggregate stocks into stock complexes, based on ecology and how they are caught by fishing fleets
+#Management alternatives / performance measures that consider energy as well as lbs as currency.
+mgmt_alternatives <- 1:7
+# Multispecies models as the assessment model in a closed loop simulation (NO)
+#Tutorial education materials on the modeling framework
+#Tutorial education materials on the management strategy evaluation process
+```
+
+```{r}
+bob <- purrr::map(ls(),get)
+mynames <- ls()
+mynames <- mynames[which(!mynames%in%c("bob","scenarios"))]
+scenarios <- expand.grid(bob) %>% tibble()
+colnames(scenarios) <- mynames
+
+print("Number of Scenarios")
+print(nrow(scenarios))
+scenarios
+```
+
+```{r}
+knitr::kable(scenarios)
+```
+
